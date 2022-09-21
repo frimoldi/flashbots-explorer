@@ -1,4 +1,17 @@
-import { Flex, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Button } from "@chakra-ui/react"
+import {
+  Flex,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
+  Button,
+  SkeletonText,
+  Skeleton,
+} from "@chakra-ui/react"
 import { useInfiniteQuery } from "react-query"
 import axios from "axios"
 import React from "react"
@@ -23,7 +36,7 @@ type BlocksResponseData = {
 }
 
 export const LatestBlocks = () => {
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Page, Error>(
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery<Page, Error>(
     "blocks",
     async ({ pageParam }) => {
       const beforeQuery = pageParam ? `before=${pageParam}` : ""
@@ -66,13 +79,17 @@ export const LatestBlocks = () => {
                 ))}
               </React.Fragment>
             ))}
-            {isFetchingNextPage &&
+            {(isLoading || isFetchingNextPage) &&
               Array(20)
                 .fill(null)
                 .map((v, i) => (
                   <Tr key={i}>
-                    <Td>...</Td>
-                    <Td>...</Td>
+                    <Td>
+                      <SkeletonText noOfLines={1} spacing="4" />
+                    </Td>
+                    <Td>
+                      <SkeletonText noOfLines={1} spacing="4" />
+                    </Td>
                   </Tr>
                 ))}
           </Tbody>
