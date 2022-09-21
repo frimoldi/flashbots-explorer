@@ -1,17 +1,4 @@
-import {
-  Flex,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Tfoot,
-  Th,
-  Thead,
-  Tr,
-  Button,
-  SkeletonText,
-  Skeleton,
-} from "@chakra-ui/react"
+import { Flex, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Button, SkeletonText } from "@chakra-ui/react"
 import { useInfiniteQuery } from "react-query"
 import axios from "axios"
 import React from "react"
@@ -59,12 +46,12 @@ export const LatestBlocks = () => {
   )
 
   return (
-    <Flex>
-      <TableContainer>
+    <Flex grow={1}>
+      <TableContainer flexGrow={1}>
         <Table>
           <Thead>
             <Tr>
-              <Th>Block number</Th>
+              <Th width="20ch">Block number</Th>
               <Th>Fee recipient</Th>
             </Tr>
           </Thead>
